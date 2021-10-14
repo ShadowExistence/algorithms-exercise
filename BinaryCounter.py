@@ -3,31 +3,26 @@
 
 #   For example the value 7 is represented by led3: 0, led2: 1, led1: 1, led0: 1
 import math
-class BinaryCounter():
+class BinaryCounter:
 
-  led = [0,0,0,0]
   def __init__(self):
+    self.__ledState =0
     pass
 
-  def numberToBinary(self, x):
-    led = self.led
+  def numberToBinary(self):
+    return  bin(self.__ledState)
+
+  def numberToHex(self):
+    return hex(self.__ledState)
+
+  def numberToDecimal(self):
+    return self.__ledState
+
+  def Increment(self):
+    if self.__ledState < 16: #limit to 4 leds > 4^2 = 16
+      self.__ledState +=1
+
+  def Decrement(self):
+    if self.__ledState > 0:
+      self.__ledState -=1
     
-    if x >= 16:
-      print("Need number lower than 16")
-      return [0]
-    else:
-      for i in range(4): 
-        if x % 2 == 1:
-          led.insert(0, 1)
-        else:
-          led.insert(0, 0)
-        x = math.floor(x/2)
-    return led
-
-counter = BinaryCounter()
-
-x = counter.numberToBinary(5)
-output = ""
-for i in range(0, 4):
-  output += str(x[i])
-print(output)
